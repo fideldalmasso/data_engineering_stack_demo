@@ -1,16 +1,25 @@
 services:
-  db:
-    image: postgres:15
-    restart: always
-    shm_size: 128mb
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1234
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+  # db:
+  #   image: postgres:15
+  #   restart: always
+  #   shm_size: 128mb
+  #   environment:
+  #     POSTGRES_DB: postgres
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: 1234
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
 
-volumes:
-  pgdata:
+  pyspark-notebook:
+    build:
+      context: .
+      dockerfile: Dockerfile.pyspark
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/notebooks
+
+# volumes:
+  # pgdata:

@@ -1,0 +1,8 @@
+FROM jupyter/pyspark-notebook:latest
+
+USER root
+
+# Install requests via pip
+RUN pip install requests pandas
+
+USER $NB_UID
