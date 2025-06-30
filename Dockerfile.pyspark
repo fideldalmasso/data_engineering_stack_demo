@@ -2,10 +2,7 @@ FROM jupyter/pyspark-notebook:latest
 
 USER root
 
-# Install requests via pip
 RUN pip install requests pandas
-
-# Download PostgreSQL JDBC driver
 RUN wget -O /usr/local/spark/jars/postgresql.jar https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
 
 USER $NB_UID
