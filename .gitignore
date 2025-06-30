@@ -1,4 +1,5 @@
 .ipynb_checkpoints/
 csv/
 zip/
+parquet/
 Pipfile.lock
