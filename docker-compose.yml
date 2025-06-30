@@ -1,5 +1,6 @@
 services:
   output-db:
+    container_name: output-db
     image: postgres:15
     restart: always
     shm_size: 128mb
@@ -7,12 +8,14 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
+      PGPORT: 5433
     ports:
-      - "5433:5432"
+      - "5433:5433"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   pyspark-notebook:
+    container_name: pyspark-notebook
     build:
       context: .
       dockerfile: Dockerfile.pyspark
@@ -20,6 +23,6 @@ services:
       - "8888:8888"
     volumes:
       - ./notebooks:/home/jovyan/notebooks
-
+      
 volumes:
   pgdata:
