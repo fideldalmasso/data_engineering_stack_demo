@@ -16,8 +16,8 @@ services:
 
   pyspark-notebook:
     container_name: pyspark-notebook
-    profiles: 
-      - notebook
+    # profiles: 
+    #   - notebook
     build:
       context: .
       dockerfile: Dockerfile.pyspark
@@ -26,8 +26,8 @@ services:
     volumes:
       - ./notebooks:/home/jovyan/notebooks
   metabase:
-    profiles: 
-      - visualization
+    # profiles: 
+    #   - visualization
     image: metabase/metabase:latest
     container_name: metabase
     hostname: metabase
@@ -48,8 +48,8 @@ services:
       timeout: 5s
       retries: 5
   postgres:
-    profiles: 
-        - visualization
+    # profiles: 
+    #   - visualization
     image: postgres:latest
     container_name: postgres
     hostname: postgres
@@ -58,6 +58,9 @@ services:
       POSTGRES_DB: metabaseappdb
       POSTGRES_PASSWORD: mysecretpassword
       PGPORT: 5555
+    volumes:
+      - metabase_pgdata:/var/lib/postgresql/data
 
 volumes:
   pgdata:
+  metabase_pgdata:

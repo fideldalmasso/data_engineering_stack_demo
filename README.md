@@ -11,13 +11,14 @@ To automatically download, unzip, normalize tables and save them into a postgreS
 Requires [Docker](https://www.docker.com/get-started/)
 ```bash
 docker-compose build
-docker-compose --profile notebook up 
+docker-compose up -d
+docker-compose logs pyspark-notebook --follow
 ```
 - Run jupyter notebooks files from `notebooks/` via VSCode or by using http://localhost:8888/ + token
 - Use Ctrl+C to Stop or `docker-compose down`
 ## 2. Metabase = Data Visualization
 ```bash
-docker-compose --profile visualization up
+docker-compose logs metabase --follow
 ```
 - Access Metabase dashboard from http://localhost:3000/
 - Use Ctrl+C to Stop or docker-compose down
