@@ -25,6 +25,25 @@ cd airflow
 astro dev start
 ```
 - Acces Airflow dashboard from http://localhost:8080/
+---
+# TODO List
+- [x] Set up multi-container stack with Jupyter notebook + Spark for local development
+- [x] Download .csv files and unzip them 
+- [x] Normalize tables using PySpark
+- [x] Configure PosgreSQL DB and write table outputs
+- [ ] Use psycopg2 to add PK and FK constraints into Database
+- [x] Finish basic Airflow (Astro) configuration for master and worker setup
+- [x] Set up basic DAG example for data ingestion
+- [ ] Fix spark-worker without write permissions
+- [ ] Migrate notebooks files to new DAG in Airflow environment
+- [ ] Configure daily scheduler and conditional download based on filename (DAG)
+- [x] Set up Metabase app for easy-to-use data visualization
+- [ ] Create meaningful visualizations in Metabase 
+- [ ] Migrate parquet to delta lake to allow for efficient storage of historical records
+- [ ] Deploy Airflow (Astro) setup Astronomer Cloud
+- [ ] Databricks integration: Migrate SparkSubmitOperator to DatabricksSubmitRunOperator
+- [ ] Storage migration: use AWS S3 buckets instead
+- [ ] Database server migration: use AWS RDS service
 
 # Dataset source
 https://www.pwc.com/us/en/careers/university-relations/data-and-analytics-case-studies-files.html
