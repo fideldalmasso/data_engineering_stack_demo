@@ -42,30 +42,6 @@ services:
       - spark-master
     networks:
       - airflow
-    
-  # pyspark-notebook:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.pyspark
-  #   image: jupyter/pyspark-notebook:latest
-  #   ports:
-  #     - "8888:8888"
-  #   volumes:
-  #     - ./include:/home/jovyan/include
-  
-  # output_db:
-  #   image: postgres:15
-  #   restart: always
-  #   shm_size: 128mb
-  #   environment:
-  #     POSTGRES_DB: postgres
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: 1234
-  #   ports:
-  #     - "5433:5432"
-  #   volumes:
-  #     - pgdata:/var/lib/postgresql/data
 
 volumes:
   spark-data:
-  # pgdata:
