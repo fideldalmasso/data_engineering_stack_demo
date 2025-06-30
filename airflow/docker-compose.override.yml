@@ -1,0 +1,71 @@
+services:
+  spark-master:
+    container_name: spark-master
+    image: bitnami/spark:latest
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - SPARK_MASTER_WEBUI_PORT=8081
+    ports:
+      - "8081:8081"
+      - "7077:7077"
+    volumes:
+      - spark-data:/bitnami
+      - ./apps:/opt/spark-apps
+      - ./data:/opt/spark-data
+    networks:
+      - airflow
+
+  spark-worker:
+    container_name: spark-worker
+    image: bitnami/spark:latest
+    user: root
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=512m
+      - SPARK_WORKER_CORES=2
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    volumes:
+      - spark-data:/home/data2
+      - ./apps:/opt/spark-apps
+      # - ./data:/opt/spark-data
+      # - ./data:/home/data
+      - ./data:/tmp/data
+    depends_on:
+      - spark-master
+    networks:
+      - airflow
+    
+  # pyspark-notebook:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.pyspark
+  #   image: jupyter/pyspark-notebook:latest
+  #   ports:
+  #     - "8888:8888"
+  #   volumes:
+  #     - ./include:/home/jovyan/include
+  
+  # output_db:
+  #   image: postgres:15
+  #   restart: always
+  #   shm_size: 128mb
+  #   environment:
+  #     POSTGRES_DB: postgres
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: 1234
+  #   ports:
+  #     - "5433:5432"
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+
+volumes:
+  spark-data:
+  # pgdata:
