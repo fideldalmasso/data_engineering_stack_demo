@@ -1,5 +1,7 @@
 .ipynb_checkpoints/
-storage/*/*
+storage/**
 Pipfile.lock
 converted
 __pycache__
+.jupyter/**
+!.jupyter/jupyter_server_config.json
