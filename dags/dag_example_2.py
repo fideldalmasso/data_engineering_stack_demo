@@ -7,7 +7,7 @@ with DAG('dag_example_2', start_date=datetime(2022,1,1)) as dag:
     
     submit_job = SparkSubmitOperator(
         task_id='submit_job',
-        application='include/pyspark_script.py',
+        application='include/dag_example_2/pyspark_script.py',
         conn_id='my_spark_conn',
         total_executor_cores='1',
         executor_cores='1',

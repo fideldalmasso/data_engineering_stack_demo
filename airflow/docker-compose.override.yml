@@ -43,5 +43,23 @@ services:
     networks:
       - airflow
 
+  scheduler:
+    volumes:
+      - ../include:/usr/local/airflow/include
+      - ../storage:/usr/local/airflow/storage
+      - ../dags:/usr/local/airflow/dags
+
+  api-server:
+    volumes:
+      - ../include:/usr/local/airflow/include
+      - ../storage:/usr/local/airflow/storage
+      - ../dags:/usr/local/airflow/dags
+  
+  dag-processor:
+    volumes:
+      - ../include:/usr/local/airflow/include
+      - ../storage:/usr/local/airflow/storage
+      - ../dags:/usr/local/airflow/dags
+
 volumes:
   spark-data:

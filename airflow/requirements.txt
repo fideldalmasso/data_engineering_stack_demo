@@ -3,3 +3,5 @@ apache-airflow-providers-apache-spark==5.3.0
 apache-airflow-providers-common-compat==1.7.1
 pandas
 pyarrow
+jupyter
+nbconvert

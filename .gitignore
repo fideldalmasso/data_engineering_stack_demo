@@ -1,5 +1,5 @@
 .ipynb_checkpoints/
-csv/
-zip/
-parquet/
+storage/*/*
 Pipfile.lock
+converted
+__pycache__
