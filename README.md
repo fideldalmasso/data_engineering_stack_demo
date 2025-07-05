@@ -51,10 +51,10 @@ astro dev start
 
 
 #  Entity Relationship Diagram (ERD)
-[![ERD diagram](ERD.png)](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=DER%20inventory_analysis&dark=auto#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1_B1yiPsM6hpgth14rVbpCK10uO4eSjG3%26export%3Ddownload)
+[![ERD diagram](docs/ERD.png)](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=DER%20inventory_analysis&dark=auto#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1_B1yiPsM6hpgth14rVbpCK10uO4eSjG3%26export%3Ddownload)
 # Stack Screenshots
-![Metabase auto-generated graphs](<screenshots/Screenshot (6).png>)
-![Metabase dashboard](<screenshots/Screenshot (10).png>)
-![Jupyter notebook with PySpark](<screenshots/Screenshot (12).png>)
-![PostgreSQL DB in DBeaver](<screenshots/Screenshot (15).png>)
-![Airflow DAG execution](<screenshots/Screenshot (16).png>)
+![Metabase auto-generated graphs](<docs/Screenshot (6).png>)
+![Metabase dashboard](<docs/Screenshot (10).png>)
+![Jupyter notebook with PySpark](<docs/Screenshot (12).png>)
+![PostgreSQL DB in DBeaver](<docs/Screenshot (15).png>)
+![Airflow DAG execution](<docs/Screenshot (16).png>)
