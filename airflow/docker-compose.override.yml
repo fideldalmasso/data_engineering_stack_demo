@@ -1,47 +1,87 @@
 services:
   spark-master:
-    container_name: spark-master
-    image: bitnami/spark:latest
-    environment:
-      - SPARK_MODE=master
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-      - SPARK_MASTER_WEBUI_PORT=8081
-    ports:
-      - "8081:8081"
-      - "7077:7077"
+    container_name: da-spark-master
+    build:
+      context: .
+      dockerfile: Dockerfile.spark
+    image: da-spark-image
+    entrypoint: ['./entrypoint.sh', 'master']
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080" ]
+      interval: 5s
+      timeout: 3s
+      retries: 3
     volumes:
-      - spark-data:/bitnami
-      - ./apps:/opt/spark-apps
-      - ./data:/opt/spark-data
+      # - ./book_data:/opt/spark/data
+      # - ./spark_apps:/opt/spark/apps
+      - spark-logs:/opt/spark/spark-events
+      - ../storage:/opt/spark/storage
+    env_file:
+      - spark_config/.env.spark
+    ports:
+      - '9090:8080'
+      - '7077:7077'
     networks:
       - airflow
 
-  spark-worker:
-    container_name: spark-worker
-    image: bitnami/spark:latest
-    user: root
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=512m
-      - SPARK_WORKER_CORES=2
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-    volumes:
-      - spark-data:/home/data2
-      - ./apps:/opt/spark-apps
-      # - ./data:/opt/spark-data
-      # - ./data:/home/data
-      - ./data:/tmp/data
+
+  spark-history-server:
+    container_name: da-spark-history
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.spark
+    image: da-spark-image
+    entrypoint: ['./entrypoint.sh', 'history']
     depends_on:
       - spark-master
+    env_file:
+      - spark_config/.env.spark
+    volumes:
+      - spark-logs:/opt/spark/spark-events
+      - ../storage:/opt/spark/storage
+    ports:
+      - '18080:18080'
     networks:
       - airflow
+
+  spark-worker-1:
+    container_name: da-spark-worker-1
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.spark
+    image: da-spark-image
+    entrypoint: ['./entrypoint.sh', 'worker']
+    depends_on:
+      - spark-master
+    env_file:
+      - spark_config/.env.spark
+    volumes:
+      # - ./book_data:/opt/spark/data
+      # - ./spark_apps:/opt/spark/apps
+      - spark-logs:/opt/spark/spark-events
+      - ../storage:/opt/spark/storage
+    networks:
+      - airflow
+  
+  spark-worker-2:
+    container_name: da-spark-worker-2
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.spark
+    image: da-spark-image
+    entrypoint: ['./entrypoint.sh', 'worker']
+    depends_on:
+      - spark-master
+    env_file:
+      - spark_config/.env.spark
+    volumes:
+      # - ./book_data:/opt/spark/data
+      # - ./spark_apps:/opt/spark/apps
+      - spark-logs:/opt/spark/spark-events
+      - ../storage:/opt/spark/storage
+    networks:
+      - airflow
+
 
   scheduler:
     volumes:
@@ -62,4 +102,8 @@ services:
       - ../dags:/usr/local/airflow/dags
 
 volumes:
-  spark-data:
+  spark-logs:
+
+# networks:
+#   airflow:
+#     external: true
