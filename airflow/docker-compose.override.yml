@@ -12,24 +12,19 @@ services:
       timeout: 3s
       retries: 3
     volumes:
-      # - ./book_data:/opt/spark/data
-      # - ./spark_apps:/opt/spark/apps
       - spark-logs:/opt/spark/spark-events
-      - ../storage:/opt/spark/storage
+      - storage:/opt/spark/storage
     env_file:
       - spark_config/.env.spark
     ports:
       - '9090:8080'
       - '7077:7077'
-    networks:
-      - airflow
+    # networks:
+    #   - airflow
 
 
   spark-history-server:
     container_name: da-spark-history
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile.spark
     image: da-spark-image
     entrypoint: ['./entrypoint.sh', 'history']
     depends_on:
@@ -38,17 +33,14 @@ services:
       - spark_config/.env.spark
     volumes:
       - spark-logs:/opt/spark/spark-events
-      - ../storage:/opt/spark/storage
+      - storage:/opt/spark/storage
     ports:
       - '18080:18080'
-    networks:
-      - airflow
+    # networks:
+    #   - airflow
 
   spark-worker-1:
     container_name: da-spark-worker-1
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile.spark
     image: da-spark-image
     entrypoint: ['./entrypoint.sh', 'worker']
     depends_on:
@@ -56,18 +48,13 @@ services:
     env_file:
       - spark_config/.env.spark
     volumes:
-      # - ./book_data:/opt/spark/data
-      # - ./spark_apps:/opt/spark/apps
       - spark-logs:/opt/spark/spark-events
-      - ../storage:/opt/spark/storage
-    networks:
-      - airflow
+      - storage:/opt/spark/storage
+    # networks:
+    #   - airflow
   
   spark-worker-2:
     container_name: da-spark-worker-2
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile.spark
     image: da-spark-image
     entrypoint: ['./entrypoint.sh', 'worker']
     depends_on:
@@ -75,35 +62,30 @@ services:
     env_file:
       - spark_config/.env.spark
     volumes:
-      # - ./book_data:/opt/spark/data
-      # - ./spark_apps:/opt/spark/apps
       - spark-logs:/opt/spark/spark-events
-      - ../storage:/opt/spark/storage
-    networks:
-      - airflow
+      - storage:/opt/spark/storage
+    # networks:
+    #   - airflow
 
 
   scheduler:
     volumes:
       - ../include:/usr/local/airflow/include
-      - ../storage:/usr/local/airflow/storage
       - ../dags:/usr/local/airflow/dags
+      - storage:/usr/local/airflow/storage:rw
 
   api-server:
     volumes:
       - ../include:/usr/local/airflow/include
-      - ../storage:/usr/local/airflow/storage
       - ../dags:/usr/local/airflow/dags
+      - storage:/usr/local/airflow/storage:rw
   
   dag-processor:
     volumes:
       - ../include:/usr/local/airflow/include
-      - ../storage:/usr/local/airflow/storage
       - ../dags:/usr/local/airflow/dags
+      - storage:/usr/local/airflow/storage:rw
 
 volumes:
+  storage:
   spark-logs:
-
-# networks:
-#   airflow:
-#     external: true
