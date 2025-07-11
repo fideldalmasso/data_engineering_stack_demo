@@ -18,6 +18,7 @@ docker-compose logs pyspark-notebook --follow
 - Use Ctrl+C to Stop or `docker-compose down`
 ## 2. Metabase = Data Visualization
 ```bash
+docker-compose up -d
 docker-compose logs metabase --follow
 ```
 - Access Metabase dashboard from http://localhost:3000/
@@ -25,9 +26,10 @@ docker-compose logs metabase --follow
 
 ## 3. Airflow (Astro CLI) = Workflow Orchestration
 Requires [Astronomer](https://www.astronomer.io/docs/astro/cli/install-cli/?tab=windowswithwinget#install-the-astro-cli)
-```
+```bash
 cd airflow
 astro dev start
+docker exec -it da-spark-master chmod 777 storage 
 ```
 - Access via http://localhost:8080/
 # TODO List
@@ -35,14 +37,14 @@ astro dev start
 - [x] Download .csv files and unzip them 
 - [x] Normalize tables using PySpark
 - [x] Configure PosgreSQL DB and write table outputs
-- [ ] Use psycopg2 to add PK and FK constraints into Database
+- [x] Use psycopg2 to add PK and FK constraints into Database
 - [x] Finish basic Airflow (Astro) configuration for master and worker setup
 - [x] Set up basic DAG example for data ingestion
-- [ ] Fix spark-worker without write permissions
-- [ ] Migrate notebooks files to new DAG in Airflow environment
+- [x] Fix spark-worker without write permissions
+- [x] Migrate notebooks files to new DAG in Airflow environment
 - [ ] Configure daily scheduler and conditional download based on filename (DAG)
 - [x] Set up Metabase app for easy-to-use data visualization
-- [ ] Create meaningful visualizations in Metabase 
+- [x] Create meaningful visualizations in Metabase 
 - [ ] Migrate parquet to delta lake to allow for efficient storage of historical records
 - [ ] Deploy Airflow (Astro) setup Astronomer Cloud
 - [ ] Databricks integration: Migrate SparkSubmitOperator to DatabricksSubmitRunOperator
