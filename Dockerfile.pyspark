@@ -2,7 +2,7 @@ FROM jupyter/pyspark-notebook:latest
 
 USER root
 
-RUN pip install requests pandas
+RUN pip install requests pandas psycopg2-binary
 RUN wget -O /usr/local/spark/jars/postgresql.jar https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
 
 USER $NB_UID
