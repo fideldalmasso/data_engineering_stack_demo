@@ -54,5 +54,5 @@ with DAG('drink_distribution_company') as dag:
         print(airflow.__version__)
         runpy.run_path('include/drink_distribution_company/converted/task04-write-to-db.py', run_name='__main__')
 
-    convert_notebooks() >> download() >> unzip() >> transform >> write_to_db()
+    convert_notebooks() >> download() >> unzip() >> transform() >> write_to_db()
 
