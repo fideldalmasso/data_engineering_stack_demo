@@ -1,8 +1,11 @@
 # Data Engineering Stack Demo
 This repo contains a modular and extensible demo stack for Data Engineering workflows, using open-source tools. 
 
-# Source dataset
+# Source datasets
+- Drink distribution company
 Case study from PwC. [Download here](https://www.pwc.com/us/en/careers/university-relations/data-and-analytics-case-studies-files.html)
+- Taxi industry
+TLC Trip Record Data from NYC. [Download here](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
 
 # Stack components
 
@@ -25,7 +28,7 @@ docker-compose logs metabase --follow
 - Use Ctrl+C to Stop or docker-compose down
 
 ## 3. Airflow (Astro CLI) = Workflow Orchestration
-Requires [Astronomer](https://www.astronomer.io/docs/astro/cli/install-cli/?tab=windowswithwinget#install-the-astro-cli)
+Requires [Astronomer](https://www.astronomer.io/docs/images/astro/cli/install-cli/?tab=windowswithwinget#install-the-astro-cli)
 ```bash
 cd airflow
 astro dev start
@@ -52,11 +55,11 @@ docker exec -it da-spark-master chmod 777 storage
 - [ ] Database server migration: use AWS RDS service
 
 
-#  Entity Relationship Diagram (ERD)
-[![ERD diagram](docs/ERD.png)](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=DER%20inventory_analysis&dark=auto#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1_B1yiPsM6hpgth14rVbpCK10uO4eSjG3%26export%3Ddownload)
+#  Drink distribution company: ERD
+[![ERD diagram](docs/images/ERD.png)](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=DER%20inventory_analysis&dark=auto#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1_B1yiPsM6hpgth14rVbpCK10uO4eSjG3%26export%3Ddownload)
 # Stack Screenshots
-![Metabase auto-generated graphs](<docs/Screenshot (6).png>)
-![Metabase dashboard](<docs/Screenshot (10).png>)
-![Jupyter notebook with PySpark](<docs/Screenshot (12).png>)
-![PostgreSQL DB in DBeaver](<docs/Screenshot (15).png>)
-![Airflow DAG execution](<docs/Screenshot (16).png>)
+![Metabase auto-generated graphs](<docs/images/Screenshot (6).png>)
+![Metabase dashboard](<docs/images/Screenshot (10).png>)
+![Jupyter notebook with PySpark](<docs/images/Screenshot (12).png>)
+![PostgreSQL DB in DBeaver](<docs/images/Screenshot (15).png>)
+![Airflow DAG execution](<docs/images/Screenshot (16).png>)
