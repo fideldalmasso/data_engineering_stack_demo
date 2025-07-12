@@ -19,8 +19,8 @@ services:
     ports:
       - '9090:8080'
       - '7077:7077'
-    # networks:
-    #   - airflow
+    networks:
+      - my_network
 
 
   spark-history-server:
@@ -36,8 +36,8 @@ services:
       - storage:/opt/spark/storage
     ports:
       - '18080:18080'
-    # networks:
-    #   - airflow
+    networks:
+      - my_network
 
   spark-worker-1:
     container_name: da-spark-worker-1
@@ -50,8 +50,8 @@ services:
     volumes:
       - spark-logs:/opt/spark/spark-events
       - storage:/opt/spark/storage
-    # networks:
-    #   - airflow
+    networks:
+      - my_network
   
   spark-worker-2:
     container_name: da-spark-worker-2
@@ -64,8 +64,8 @@ services:
     volumes:
       - spark-logs:/opt/spark/spark-events
       - storage:/opt/spark/storage
-    # networks:
-    #   - airflow
+    networks:
+      - my_network
 
 
   scheduler:
@@ -73,19 +73,29 @@ services:
       - ../include:/usr/local/airflow/include
       - ../dags:/usr/local/airflow/dags
       - storage:/usr/local/airflow/storage:rw
+    networks:
+      - my_network
 
   api-server:
     volumes:
       - ../include:/usr/local/airflow/include
       - ../dags:/usr/local/airflow/dags
       - storage:/usr/local/airflow/storage:rw
+    networks:
+      - my_network
   
   dag-processor:
     volumes:
       - ../include:/usr/local/airflow/include
       - ../dags:/usr/local/airflow/dags
       - storage:/usr/local/airflow/storage:rw
+    networks:
+        - my_network
 
 volumes:
   storage:
   spark-logs:
+
+networks:
+  my_network:
+    name: my_network
