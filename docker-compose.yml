@@ -13,8 +13,8 @@ services:
       - "5433:5433"
     volumes:
       - pgdata:/var/lib/postgresql/data
-    networks:
-      - my_network
+    # networks:
+    #   - my_network
 
   pyspark-notebook:
     container_name: pyspark-notebook
@@ -27,8 +27,8 @@ services:
       - ./include:/home/jovyan/include
       - ./storage:/home/jovyan/storage
       - ./.jupyter:/home/jovyan/.jupyter
-    networks:
-      - my_network
+    # networks:
+    #   - my_network
   metabase:
     image: metabase/metabase:latest
     container_name: metabase
@@ -60,13 +60,13 @@ services:
       PGPORT: 5555
     volumes:
       - metabase_pgdata:/var/lib/postgresql/data
-    networks:
-      - my_network
+    # networks:
+    #   - my_network
 
 volumes:
   pgdata:
   metabase_pgdata:
 
-networks:
-  my_network:
-    name: my_network
+# networks:
+#   my_network:
+#     name: my_network
