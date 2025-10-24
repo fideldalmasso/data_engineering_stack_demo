@@ -1,6 +1,6 @@
 # Astro Runtime includes the following pre-installed providers packages: https://www.astronomer.io/docs/astro/runtime-image-architecture#provider-packages
 apache-airflow-providers-apache-spark==5.3.0
-apache-airflow-providers-common-compat==1.7.1
+apache-airflow-providers-common-compat==1.7.4
 pandas
 pyarrow
 jupyter
